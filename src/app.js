@@ -19,12 +19,15 @@ import socketChat from './listeners/socketChat.js';
 
 import session from "express-session"
 import MongoStore from "connect-mongo"
+import swaggerJSDoc from 'swagger-jsdoc'
+import swaggerUiExpress from 'swagger-ui-express'
 
 import passport from 'passport'
 import initializePassport from './config/passport.config.js'
 import config from './config/config.js';
 import errorHandler from './middleware/error.middleware.js'
 import logger from './logger.js';
+
 
 
 const port = config.port
@@ -59,6 +62,22 @@ app.use(
     saveUninitialized: true,
   })
 );
+
+// Documentacion 
+const swaggerOptions = {
+  definition: {
+    openapi: '3.0.1',
+    info: {
+      title: 'Documentación de la API del Ecommerce',
+      description: 'Aqui va la descripcion del proyecto...'
+    }
+  },
+  apis: ['./docs/**/*.yaml']
+};
+
+const specs = swaggerJSDoc(swaggerOptions)
+app.use('/docs',swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
+
 
 // configuracion de passport
 initializePassport();
