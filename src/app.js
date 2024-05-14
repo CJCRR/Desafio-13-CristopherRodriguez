@@ -63,26 +63,26 @@ app.use(
   })
 );
 
-// Documentacion 
-const swaggerOptions = {
-  definition: {
-    openapi: '3.0.1',
-    info: {
-      title: 'Documentación de la API del Ecommerce',
-      description: 'Aqui va la descripcion del proyecto...'
-    }
-  },
-  apis: ['./docs/**/*.yaml']
-};
-
-const specs = swaggerJSDoc(swaggerOptions)
-app.use('/docs',swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
-
 
 // configuracion de passport
 initializePassport();
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Documentacion 
+const swaggerOptions = {
+  definition: {
+    openapi: '3.0.1',
+    info: {
+    title: 'Documentación de la API del Ecommerce',
+    description: 'Aqui va la descripcion del proyecto Ecommerce Agroaprtes...'
+    }
+  },
+  apis: [`./docs/**/*.yaml`]
+  };  
+  
+const specs = swaggerJSDoc(swaggerOptions)
+app.use('/apidocs',swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
 
 app.use("/", viewsRoutes);
 app.use('/', viewsUserRouter);
@@ -92,6 +92,7 @@ app.use('/api/carts', routerCarts);
 app.use('/api/email', mailPurchaseRouter);
 app.use('/mockingproducts', mockingRouter);
 app.use('/loggerTest', loggerRouter);
+
 
 app.use((req, res) => {
   res.render("404");

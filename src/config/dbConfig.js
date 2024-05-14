@@ -1,6 +1,7 @@
 import mongoose from "mongoose"
 import config from "./config.js";
 import logger from "../logger.js";
+import { __dirname } from "../utils.js";
 
 const mongoURL = config.mongoURL;
 
