@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
 import config from "./config.js";
+import logger from "../logger.js";
 
 const mongoURL = config.mongoURL;
 
@@ -11,9 +12,9 @@ const connectToDB = () => {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         })
-        console.log('Base de datos ecommerce conectada')
+        logger.info('Base de datos ecommerce conectada')
     } catch (error) {
-        console.log(error);
+        logger.error(error);
     }
 };
 

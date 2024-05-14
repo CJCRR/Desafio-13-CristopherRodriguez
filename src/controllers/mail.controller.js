@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer'
 import config from '../config/config.js';
+import logger from '../logger.js';
 
 export const getbill = async (req, res) => {
     let configMail = {
@@ -15,9 +16,9 @@ export const getbill = async (req, res) => {
     const purchasedProducts = req.body; // Acceder a los datos de los productos comprados directamente desde el cuerpo de la solicitud POST
 
     // Verificar el valor de purchasedProducts
-    console.log('purchasedProducts:', purchasedProducts);
-    console.log('typeof purchasedProducts:', typeof purchasedProducts);
-    console.log('Array.isArray(purchasedProducts):', Array.isArray(purchasedProducts));
+    logger.debug('purchasedProducts:', purchasedProducts);
+    logger.debug('typeof purchasedProducts:', typeof purchasedProducts);
+    logger.debug('Array.isArray(purchasedProducts):', Array.isArray(purchasedProducts));
 
     // Construir la tabla HTML con los detalles de la compra
     let purchaseDetails = '<h2>Detalle de la Compra</h2><table border="1"><tr><th>Producto</th><th>Cantidad</th><th>Precio Unitario</th></tr>';
